@@ -2,12 +2,14 @@ import os
 from Pelicula import Pelicula
 class List_Peliculas:
     pelis = []
-    def agregar_pelicula(self,nom):
+
+    @classmethod
+    def agregar_pelicula(cls,nom):
         pelicula = Pelicula()
         pelicula.set_nombre(nom)
         archivo = None
         try:
-            archivo = open("Peliculas.txt","a+")
+            archivo = open("Peliculas.txt","a+",encoding="utf8")
             archivo.write(pelicula.get_nombre()+"\n")
         except Exception as e:
             print(f"Ocurrio un error: {e}")
@@ -18,13 +20,14 @@ class List_Peliculas:
             print("Se agrego correctamente...")
             archivo.close()
 
-    def leer_peliculas(self):
+    @classmethod
+    def leer_peliculas(cls):
         ruta = "Peliculas.txt"
         archivo = None
         lineas = []
         try:
             if  os.path.exists(ruta):
-                archivo = open(ruta,"r")
+                archivo = open(ruta,"r",encoding="utf8")
                 lineas = archivo.readlines()
             else:
                 archivo = open(ruta,"x")
@@ -38,7 +41,8 @@ class List_Peliculas:
                     List_Peliculas.pelis.append(peli)
                     archivo.close()
 
-    def eliminar_catalogo(self):
+    @classmethod
+    def eliminar_catalogo(cls):
         try:
             os.remove("Peliculas.txt")
         except Exception as e:
