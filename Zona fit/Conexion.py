@@ -1,4 +1,5 @@
 from mysql.connector import pooling
+from mysql.connector import Error
 
 ##Un pool de conexiones se ultiliza para poder tener mas de una conexion en simultaneo en la BD
 
@@ -25,10 +26,11 @@ class Conexion:
                     user = cls.USERNAME,
                     password = cls.PASSWORD
                 )
-            except Exception as e:
-                print(f"Ocurrio un error en la conexion a la BD: {e}")
-            else:
                 return cls.pool
+            except Error as e:
+                print(f"Ocurrio un error en la conexion a la BD: {e}")
+        else:
+            return cls.pool
 
     @classmethod
     def obtener_conexion(cls):

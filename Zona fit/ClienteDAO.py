@@ -30,7 +30,7 @@ class ClienteDAO:
                 clientes.append(cliente)
 
             return clientes
-        except Exception as e:
+        except Error as e:
             print(f"Ocurrio un error al seleccionar clientes: {e}")
         finally:
             if conexion is not None:
